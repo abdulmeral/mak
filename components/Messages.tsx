@@ -42,20 +42,22 @@ export default function Messages({ onPageChange }: MessagesProps) {
       if (studentsResponse.ok) {
         const studentsData = await studentsResponse.json();
         setStudents(studentsData);
-      }
-      
-      // Mock messages for now - will be replaced with real API later
-      setMessages([
-        {
-          id: '1',
-          studentId: studentsData[0]?.id || 1,
-          subject: 'Antrenman Programı Hakkında',
-          content: 'Merhaba, yeni antrenman programım hakkında sorularım var...',
-          timestamp: new Date(),
-          read: false,
-          type: 'email'
+        
+        // Mock messages for now - will be replaced with real API later
+        if (studentsData.length > 0) {
+          setMessages([
+            {
+              id: '1',
+              studentId: studentsData[0].id,
+              subject: 'Antrenman Programı Hakkında',
+              content: 'Merhaba, yeni antrenman programım hakkında sorularım var...',
+              timestamp: new Date(),
+              read: false,
+              type: 'email'
+            }
+          ]);
         }
-      ]);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {

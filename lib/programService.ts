@@ -101,7 +101,7 @@ export async function updateProgram(id: number, programData: Partial<Program>): 
 export async function deleteProgram(id: number): Promise<boolean> {
   const db = await getDatabase();
   const result = await db.run('UPDATE programs SET status = "deleted" WHERE id = ?', id);
-  return result.changes > 0;
+  return (result.changes || 0) > 0;
 }
 
 export async function assignProgramToStudent(studentId: number, programId: number, startDate?: string): Promise<boolean> {
@@ -122,7 +122,7 @@ export async function assignProgramToStudent(studentId: number, programId: numbe
     VALUES (?, ?, ?, 'active')
   `, [studentId, programId, startDate || new Date().toISOString()]);
   
-  return result.changes > 0;
+  return (result.changes || 0) > 0;
 }
 
 export async function getStudentPrograms(studentId: number): Promise<Program[]> {

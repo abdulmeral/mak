@@ -244,10 +244,10 @@ export default function Students({ onPageChange }: StudentsProps) {
               </button>
             </div>
 
-            {student.currentProgram && (
+            {student.programs && student.programs.length > 0 && (
               <div className="mt-4 p-3 bg-dark-300 rounded-lg">
-                <div className="text-sm font-medium text-white">Mevcut Program</div>
-                <div className="text-xs text-gray-400">{student.currentProgram.name}</div>
+                <div className="text-sm font-medium text-white">Atanmış Programlar</div>
+                <div className="text-xs text-gray-400">{student.programs.length} program</div>
               </div>
             )}
           </div>

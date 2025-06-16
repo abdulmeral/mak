@@ -102,7 +102,7 @@ export async function updateStudent(id: number, studentData: Partial<Student>): 
 export async function deleteStudent(id: number): Promise<boolean> {
   const db = await getDatabase();
   const result = await db.run('UPDATE students SET status = "deleted" WHERE id = ?', id);
-  return result.changes > 0;
+  return (result.changes || 0) > 0;
 }
 
 function mapDbStudentToStudent(dbStudent: any): Student {
